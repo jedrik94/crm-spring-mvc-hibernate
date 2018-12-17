@@ -3,6 +3,8 @@ package pl.jedrik94.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.jedrik94.demo.model.Customer;
@@ -22,11 +24,28 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String listCustomer(Model model) {
+    public String listCustomers(Model model) {
         List<Customer> customerList = customerService.getCustomers();
 
         model.addAttribute("customers", customerList);
 
         return "list-customer";
+    }
+
+    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    public String showFormForAddCustomer(Model model) {
+
+        Customer customer = new Customer();
+
+        model.addAttribute("customer", customer);
+
+        return "customer-form";
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveCustomer(@ModelAttribute("customer") Customer customer) {
+        customerService.saveCustomer(customer);
+
+        return "redirect:/customer/list";
     }
 }

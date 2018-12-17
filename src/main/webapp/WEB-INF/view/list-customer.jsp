@@ -1,14 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib prefix="sp" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <html>
 <head>
     <title>Customers</title>
 
-    <spring:url value="/resources/css/style.css" var="mainCss"/>
-
-    <link rel="stylesheet" href="${mainCss}">
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
 
@@ -17,6 +14,10 @@
         <h2>CRM - Customers Relationship Manager</h2>
     </div>
 </div>
+
+<input type="button" value="Add Customer"
+       onclick="window.location.href='form'; return false;"
+       class="add-button">
 
 <div id="container">
     <div id="content">
