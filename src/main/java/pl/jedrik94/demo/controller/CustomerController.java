@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.jedrik94.demo.dao.CustomerDAO;
+import org.springframework.web.bind.annotation.RequestMethod;
 import pl.jedrik94.demo.model.Customer;
+import pl.jedrik94.demo.service.CustomerService;
 
 import java.util.List;
 
@@ -13,17 +14,16 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    final CustomerDAO customerDAO;
+    private final CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerDAO customerDAO) {
-        this.customerDAO = customerDAO;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
-    @RequestMapping("/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String listCustomer(Model model) {
-
-        List<Customer> customerList = customerDAO.getCustomers();
+        List<Customer> customerList = customerService.getCustomers();
 
         model.addAttribute("customers", customerList);
 
