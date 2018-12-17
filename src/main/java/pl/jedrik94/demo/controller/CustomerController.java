@@ -3,10 +3,10 @@ package pl.jedrik94.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.jedrik94.demo.model.Customer;
 import pl.jedrik94.demo.service.CustomerService;
 
@@ -45,6 +45,23 @@ public class CustomerController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveCustomer(@ModelAttribute("customer") Customer customer) {
         customerService.saveCustomer(customer);
+
+        return "redirect:/customer/list";
+    }
+
+    @RequestMapping(value = "/formUpdate", method = RequestMethod.GET)
+    public String updateCustomer(@RequestParam("customerId") int id, Model model) {
+
+        Customer customer = customerService.getCustomer(id);
+
+        model.addAttribute("customer", customer);
+
+        return "customer-form";
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public String deleteCustomer(@RequestParam("customerId") int id) {
+        customerService.deleteCustomer(id);
 
         return "redirect:/customer/list";
     }

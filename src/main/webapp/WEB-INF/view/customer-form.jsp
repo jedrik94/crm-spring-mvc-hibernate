@@ -18,6 +18,7 @@
 <div id="content">
     <h3>Save Customer</h3>
     <form:form action="save" modelAttribute="customer" method="post">
+        <form:hidden path="id"/>
         <table>
             <tbody>
             <tr>
