@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
     <title>Customers</title>
@@ -18,6 +18,11 @@
 <input type="button" value="Add Customer"
        onclick="window.location.href='form'; return false;"
        class="add-button">
+
+<form:form action="search" method="post">
+    Search customer: <input type="text" required="required" name="searchName"/>
+    <input type="submit" value="Search" class="add-button"/>
+</form:form>
 
 <div id="container">
     <div id="content">
@@ -43,7 +48,9 @@
                     <td>${tmpCustomer.firstName}</td>
                     <td>${tmpCustomer.lastName}</td>
                     <td>${tmpCustomer.email}</td>
-                    <td><a href="${updateLink}">Update</a> | <a href="${deleteLink}" onclick="if(!(confirm('Are you sure to delete this record?'))) return false;">Delete</a></td>
+                    <td><a href="${updateLink}">Update</a> | <a href="${deleteLink}"
+                                                                onclick="if(!(confirm('Are you sure to delete this record?'))) return false;">Delete</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
