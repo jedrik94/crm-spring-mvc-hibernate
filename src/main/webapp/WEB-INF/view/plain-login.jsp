@@ -6,6 +6,7 @@
     <title>Login Form</title>
 
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
 </head>
 <body>
 
@@ -16,6 +17,7 @@
 </div>
 
 <div id="content">
+    <h3>Login Form</h3>
     <form:form action="${pageContext.request.contextPath}/authenticateUser" method="post">
         <c:if test="${param.error != null}">
             <i class="failed">Username or password is incorrect. Please try again!</i>

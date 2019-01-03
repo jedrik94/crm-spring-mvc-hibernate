@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     public String showLoginForm() {
-        return "plain-login";
+        return "custom-login";
     }
 }
