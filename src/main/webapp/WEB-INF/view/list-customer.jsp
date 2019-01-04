@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title>Customers</title>
@@ -14,6 +15,16 @@
         <h2>CRM - Customers Relationship Manager</h2>
     </div>
 </div>
+
+<hr>
+
+<p>
+    User: <security:authentication property="principal.username"/>
+    <br><br>
+    Role(s): <security:authentication property="principal.authorities"/>
+</p>
+
+<hr>
 
 <input type="button" value="Add Customer"
        onclick="window.location.href='form'; return false;"
@@ -57,8 +68,20 @@
     </div>
 </div>
 
-<form:form action="${pageContext.request.contextPath}/logout" method="post">
-    <input type="submit" value="Logout"/>
-</form:form>
+<br><br>
+<div>
+    <form:form action="${pageContext.request.contextPath}/logout" method="post">
+        <input type="submit" value="Logout" class="add-button"/>
+    </form:form>
+    <div class="divider"></div>
+    <form:form action="${pageContext.request.contextPath}/managerPage" method="get">
+        <input type="submit" value="Manager's Page" class="add-button"/>
+    </form:form>
+    <div class="divider"></div>
+    <form:form action="${pageContext.request.contextPath}/adminPage" method="get">
+        <input type="submit" value="Admin's Page" class="add-button"/>
+    </form:form>
+</div>
+
 </body>
 </html>

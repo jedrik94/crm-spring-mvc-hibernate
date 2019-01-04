@@ -16,17 +16,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         User.UserBuilder users = User.withDefaultPasswordEncoder();
 
         auth.inMemoryAuthentication()
-                .withUser(users.username("jedrzej").password("test123").roles("ADMIN"))
-                .withUser(users.username("milosz").password("test123").roles("MANAGER"))
+                .withUser(users.username("jedrzej").password("test123").roles("EMPLOYEE", "ADMIN"))
+                .withUser(users.username("milosz").password("test123").roles("EMPLOYEE", "MANAGER"))
                 .withUser(users.username("seba").password("test123").roles("EMPLOYEE"));
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/resources/**")
-                .permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/customer/**").hasAnyRole("EMPLOYEE", "ADMIN", "MANAGER")
+                .antMatchers("/managerPage/**").hasRole("MANAGER")
+                .antMatchers("/adminPage/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login/form")
@@ -35,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/accessDenied");
     }
 }

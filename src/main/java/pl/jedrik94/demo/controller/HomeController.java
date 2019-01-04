@@ -11,4 +11,14 @@ public class HomeController {
     public String showHomePage() {
         return "home";
     }
+
+    @RequestMapping(value = "/managerPage", method = RequestMethod.GET)
+    public String showManagerPage() {
+        return "manager-welcome";
+    }
+
+    @RequestMapping(value = "/adminPage", method = RequestMethod.GET)
+    public String showAdminPage() {
+        return "admin-welcome";
+    }
 }

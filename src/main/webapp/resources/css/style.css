@@ -76,6 +76,12 @@ tr:nth-child(odd) {
     background: #cccccc;
 }
 
+.divider {
+    width: 5px;
+    height: auto;
+    display: inline-block;
+}
+
 .failed {
     color: red;
 }
