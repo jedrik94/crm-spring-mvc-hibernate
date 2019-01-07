@@ -73,14 +73,20 @@
     <form:form action="${pageContext.request.contextPath}/logout" method="post">
         <input type="submit" value="Logout" class="add-button"/>
     </form:form>
-    <div class="divider"></div>
-    <form:form action="${pageContext.request.contextPath}/managerPage" method="get">
-        <input type="submit" value="Manager's Page" class="add-button"/>
-    </form:form>
-    <div class="divider"></div>
-    <form:form action="${pageContext.request.contextPath}/adminPage" method="get">
-        <input type="submit" value="Admin's Page" class="add-button"/>
-    </form:form>
+
+    <security:authorize access="hasRole('MANAGER')">
+        <div class="divider"></div>
+        <form:form action="${pageContext.request.contextPath}/managerPage" method="get">
+            <input type="submit" value="Manager's Page" class="add-button"/>
+        </form:form>
+    </security:authorize>
+
+    <security:authorize access="hasRole('ADMIN')">
+        <div class="divider"></div>
+        <form:form action="${pageContext.request.contextPath}/adminPage" method="get">
+            <input type="submit" value="Admin's Page" class="add-button"/>
+        </form:form>
+    </security:authorize>
 </div>
 
 </body>
