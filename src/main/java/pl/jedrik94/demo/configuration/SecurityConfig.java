@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // All passwords match "qwerty12345"
         auth.jdbcAuthentication().dataSource(securityDataSource);
     }
 
